@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace DeterminPalindromeString
 {
@@ -8,8 +9,9 @@ namespace DeterminPalindromeString
         {
             string str = "a tacocata";
             bool result = FindPalidromeString(str);
+            bool result2 = FindPalindromeWithUsingArrays(str);
             Console.WriteLine(result);
-
+            Console.WriteLine(result2);
             Console.ReadLine();
         }
 
@@ -37,6 +39,31 @@ namespace DeterminPalindromeString
             }
             Console.WriteLine(str);
             return isPalindrome;
+        }
+
+        private static bool FindPalindromeWithUsingArrays(string str)
+        {
+            char[] fromLeft = new char[str.Length];
+            char[] fromRight = new char[str.Length];
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                fromLeft[i] = str[i];
+            }
+
+            for (int i = str.Length - 1; i >= 0; i--)
+            {
+                fromRight[i] = str[i];
+            }
+
+            if(fromLeft.SequenceEqual(fromRight))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
