@@ -7,49 +7,63 @@ namespace FindTheLongestPolindromeSubstring
     {
         static void Main(string[] args)
         {
-            string str = "abbacdtacocat";
-            string longetPali = FindTheLongestPolindromeSubstring(str);
-            Console.WriteLine(longetPali);
+            string str = "abbatacocat";
+            int longetPali = FindTheLongestPolindromeSubstring(str);
+            Console.WriteLine("\n"+longetPali);
             Console.ReadLine();
         }
 
-        private static string FindTheLongestPolindromeSubstring(string str)
+        private static int FindTheLongestPolindromeSubstring(string str)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            string result = "";
+            int stringLength = str.Length;
+            // using two dimention array to be able keep trak of polindroms in substring for example: geeeg ==> two dimantion array helps for "eee"
+            bool[,] table = new bool[stringLength, stringLength];
+
+            int maxLength = 1;
+            // for substring length one
+            for (int i = 0; i < stringLength ; i++)
+            {
+                table[i,i] = true;
+            }
+            // for substring length 2
             int start = 0;
-            int end = str.Length;
-            for (int i = 0; i < str.Length; i++)
+            for (int i = 0; i < stringLength - 1; i++)
             {
-                int leftLoop = str.Length - i - 1;
-                if (start < leftLoop &&  str[start] == str[leftLoop])
+                if (str[i] == str[i+1])
                 {
-                    stringBuilder.Append(str[start]);
-                    end = str.Length - i - 1;
-                    while (start < end)
-                    {
-                        if (str[start] == str[end])
-                        {
-                            start++;
-                            stringBuilder.Append(str[start]);
-                            end--;
-
-                        }
-
-                    }
-
-                    stringBuilder.Append(str[str.Length - i - 1]);
-
+                    table[i,i + 1] = true;
+                    maxLength = 2;
+                    start = i;
                 }
-
             }
-
-            if (result.Length < stringBuilder.Length)
+            // for substring more than 2
+            for (int i = 3; i <= stringLength; i++)
             {
-                result = stringBuilder.ToString();
+                for (int j = 0; j < stringLength - i + 1; j++)
+                {
+                    int k = j + i - 1;
+                    if (table[j + 1, k - 1] && str[j] == str[k] )
+                    {
+                        table[j, k] = true;
+                        if (i > maxLength)
+                        {
+                            start = j;
+                            maxLength = i;
+                        }
+                    }
+                }
             }
-            Console.WriteLine(result);
-            return result;
+            creatPolindromeString(str, start, start + maxLength);
+
+            return maxLength;
+        }
+
+        private static void creatPolindromeString(string str, int start, int end)
+        {
+            for (int i = start; i < end; i++)
+            {
+                Console.Write(str[i]);
+            }
         }
     }
 }
