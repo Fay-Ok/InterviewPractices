@@ -16,6 +16,7 @@ namespace SortBinaryArray
         {
             List<int> arrayOfZerro = new List<int>() { };
             List<int> arrayOfOne = new List<int>() { };
+
             for (int i = 0; i < intArray.Length - 1 ; i++)
             {
                 if (intArray[i] == 0)
