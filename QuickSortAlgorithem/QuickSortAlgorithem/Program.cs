@@ -17,8 +17,6 @@ namespace QuickSortAlgorithem
         {
             if(left>= right)
             {
-                
-
                 return;
             }
 
