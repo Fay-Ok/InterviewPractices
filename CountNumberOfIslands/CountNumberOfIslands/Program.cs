@@ -9,13 +9,12 @@ namespace CountNumberOfIslands
         {
             var arr = new int[,] {
                 { 1, 1, 1, 0 },
-                { 1, 0, 0, 0 },
+                { 0, 0, 0, 0 },
                 { 1, 1, 1, 0 },
                 { 0, 0, 0, 0, },
-                { 0, 0, 1, 1, },
+                { 0, 0, 0, 0, },
                 { 0, 0, 1, 1, }
             };
-  
             int result = FindNumberOfIslands(arr);
             Console.WriteLine(result);
             Console.ReadLine();
@@ -36,7 +35,8 @@ namespace CountNumberOfIslands
                 {
                     if (matrix[i, j] == 1)
                     {
-                        island = Islander(matrix, i , j);
+                        Islander(matrix, i , j);
+                        island++;
                     }
                 }
             }
@@ -44,9 +44,8 @@ namespace CountNumberOfIslands
             return island;
         }
 
-        private static int Islander(int[,] matrix, int i, int j)
+        private static void Islander(int[,] matrix, int i, int j)
         {
-            int size = 0;
             Queue<int[]> q = new Queue<int[]>();
             int row = matrix.GetLength(0);
             int column = matrix.GetLength(1);
@@ -54,7 +53,6 @@ namespace CountNumberOfIslands
 
             while (q.Count != 0)
             {
-                size++;
                 int[] position = q.Dequeue();
                 int r = position[0];
                 int c = position[1];
@@ -81,7 +79,7 @@ namespace CountNumberOfIslands
 
                 matrix[r,c] = 0;
             }
-            return size;
+           // return size;
         }
     }
 }
