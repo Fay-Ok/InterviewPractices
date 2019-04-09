@@ -8,13 +8,8 @@ namespace TwoSumUsingHashMap
         static void Main(string[] args)
         {
             int[] arr = new int[] { 2, 7, 11, 15 };
-            int target = 18;
+            int target = 17;
             Dictionary<int, int> dic = new Dictionary<int, int>();
-            for (int i = 0; i < arr.Length; i++)
-            {
-                dic.Add(arr[i], i);
-            }
-
             for (int i = 0; i < arr.Length; i++)
             {
                 var compliment = target - arr[i];
@@ -23,6 +18,7 @@ namespace TwoSumUsingHashMap
                     Console.WriteLine("the indices of two numbers: [" + dic[compliment] +", " + i + "]");
                     break;
                 }
+                dic.Add(arr[i], i);
             }
 
             Console.ReadLine();
