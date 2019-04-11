@@ -9,48 +9,32 @@ namespace GroupAnagrams
     {
         static void Main(string[] args)
         {
-            string[] str = new string[]{ "eat", "tea", "tan", "ate", "nat", "bat"};
-            IList<IList<string>> ll = new List<IList<string>>();
-            ll= GroupAnagrams(str);
-
-            DisplayGroupedAnagram(ll);
+            string[] str = new string[] { "cab", "tin", "pew", "duh", "may", "ill", "buy", "bar", "max", "doc" };
+            IList<IList<string>> l = new List<IList<string>>();
+            l = GroupAnagramWords(str);
+            DisplayGroupedAnagram(l);
             Console.ReadLine();
         }
 
-
-
-        public static IList<IList<string>> GroupAnagrams(string[] strs)
+        private static IList<IList<string>> GroupAnagramWords(string[] strs)
         {
-            Dictionary<int, List<string>> dic = new Dictionary<int, List<string>>();
-
+            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
             foreach (var item in strs)
             {
-                dic = GroupsAnagrams(item, dic);
+                char[] c = item.ToCharArray();
+                Array.Sort(c);
+                string key = new string(c);
+                if (!dic.ContainsKey(key))
+                {
+                    dic.Add(key, new List<string> { item});
+                }
+                else
+                {
+                    dic[key].Add(item); 
+                }
             }
 
-            return dic.Values.ToArray(); ;
-        }
-
-
-        private static Dictionary<int, List<string>> GroupsAnagrams(string item, Dictionary<int, List<string>> dic)
-        {
-            int sum = 0;
-            for (int i = 0; i < item.Length; i++)
-            {
-                sum += item[i] - 'a';
-            }
-            if (!dic.ContainsKey(sum))
-            {
-                dic.Add(sum, new List<string> { item });
-
-            }
-            else
-            {
-                dic[sum].Add(item);
-
-            }
-
-            return dic;
+            return dic.Values.ToArray();
         }
 
         private static void DisplayGroupedAnagram(IList<IList<string>> dic)
