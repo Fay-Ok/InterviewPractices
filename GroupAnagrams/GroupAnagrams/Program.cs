@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GroupAnagrams
 {
@@ -8,29 +10,27 @@ namespace GroupAnagrams
         static void Main(string[] args)
         {
             string[] str = new string[]{ "eat", "tea", "tan", "ate", "nat", "bat"};
-            Dictionary<int, List<string>> dic = new Dictionary<int, List<string>>();
+            IList<IList<string>> ll = new List<IList<string>>();
+            ll= GroupAnagrams(str);
 
-            foreach (var item in str)
-            {
-              dic =   GroupsAnagrams(item, dic);
-            }
-
-            DisplayGroupedAnagram(dic);
+            DisplayGroupedAnagram(ll);
             Console.ReadLine();
         }
 
-        private static void DisplayGroupedAnagram(Dictionary<int, List<string>> dic)
+
+
+        public static IList<IList<string>> GroupAnagrams(string[] strs)
         {
-            foreach (KeyValuePair<int, List<string>> keySum in dic)
+            Dictionary<int, List<string>> dic = new Dictionary<int, List<string>>();
+
+            foreach (var item in strs)
             {
-                Console.Write(keySum.Key + " ");
-                foreach (string value in keySum.Value)
-                {
-                    Console.Write(value + " ");
-                }
-                Console.Write("\n");
+                dic = GroupsAnagrams(item, dic);
             }
+
+            return dic.Values.ToArray(); ;
         }
+
 
         private static Dictionary<int, List<string>> GroupsAnagrams(string item, Dictionary<int, List<string>> dic)
         {
@@ -41,15 +41,32 @@ namespace GroupAnagrams
             }
             if (!dic.ContainsKey(sum))
             {
-                dic.Add(sum,new List<string> { item });
+                dic.Add(sum, new List<string> { item });
+
             }
             else
             {
                 dic[sum].Add(item);
+
             }
 
             return dic;
         }
-       
+
+        private static void DisplayGroupedAnagram(IList<IList<string>> dic)
+        {
+            List<string> l = new List<string>();
+            foreach (var item in dic)
+            {
+                l = item.Select(a => a).ToList();
+                foreach (var value in l)
+                {
+                    Console.Write(value + " ");
+                }
+                Console.Write("\n");
+            }
+           
+            
+        }
     }
 }
