@@ -6,8 +6,8 @@ namespace SearchInsertPosition
     {
         static void Main(string[] args)
         {
-            int[] arr = new int[] { 1, 3, 5, 6, 8, 10, 23, 34, 45,56 };
-            int target = 23;
+            int[] arr = new int[] { 1, 3, 5, 8 };
+            int target = 6;
             var result = FindInsertIndex(arr, target);
             Console.WriteLine(result);
             Console.ReadLine();
@@ -44,10 +44,20 @@ namespace SearchInsertPosition
                 }
                 if (arr[mid] < target)
                 {
+                    if (target > arr[mid + 1])
+                    {
+                        result = mid;
+                        return result;
+                    }
                     start = mid;
                 }
-                else
+                else 
                 {
+                    if (target > arr[mid - 1])
+                    {
+                        result = mid -1;
+                        return result;
+                    }
                     end = mid;
                 }
 
