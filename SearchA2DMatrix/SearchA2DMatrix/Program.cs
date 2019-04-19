@@ -15,7 +15,7 @@ namespace SearchA2DMatrix
             {81, 87, 90, 100}
             };
 
-            int target = 5;
+            int target = 74;
             string result = FindTarget(matrix, target);
             Console.WriteLine(result);
             Console.ReadLine();
@@ -49,43 +49,42 @@ namespace SearchA2DMatrix
             {
                 return false.ToString();
             }
-            int temp = 0;
-
-            while (start < end)
+            int midR = 0;
+            int columns = matrix.GetLength(1) - 1;
+            while (start <= end)
             {
-                int mid = start + (end - start)/ 2;
-                if (matrix[mid,0] == target)
+                 midR = (start+ end )/ 2;
+                if (target >= matrix[midR,0] && target <= matrix[midR,columns])
                 {
-                    return true.ToString();
+                    break;
                 }
-                if (target < matrix[mid, 0])
+                if (target < matrix[midR, 0])
                 {
-                    end = mid - 1;
+                    end = midR -1 ;
                 }
                 else
                 {
-                    start = mid + 1;
+                    start = midR + 1;
                 }
-                temp = mid;
             }
 
             int sC = 0;
             int eC = matrix.GetLength(1) - 1;
-            while (sC < eC)
+            while (sC <= eC)
             {
-                int mid = sC + (eC - sC) / 2;
+                int midC = (sC + eC)/ 2;
 
-                if (matrix[end , mid] == target)
+                if (matrix[midR, midC] == target)
                 {
                     return true.ToString();
                 }
-                if (target < matrix[end - 1, mid])
+                if (target < matrix[midR, midC])
                 {
-                    eC = mid - 1;
+                    eC = midC - 1;
                 }
                 else
                 {
-                    sC = mid + 1;
+                    sC = midC + 1;
                 }
 
             }
