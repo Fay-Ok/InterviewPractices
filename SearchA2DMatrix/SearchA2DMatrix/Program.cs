@@ -15,7 +15,7 @@ namespace SearchA2DMatrix
             {81, 87, 90, 100}
             };
 
-            int target = 74;
+            int target = 9;
             string result = FindTarget(matrix, target);
             Console.WriteLine(result);
             Console.ReadLine();
@@ -91,5 +91,32 @@ namespace SearchA2DMatrix
 
             return false.ToString();
         }
+
+    //    int start = 0;
+
+    //    int m = matrix.Length, n = matrix.GetLength(0), lo = 0, hi = m * n - 1, mi, row, col;
+    //    int end = matrix.Length * matrix.GetLength(0) - 1;
+    //        while (start <= end)
+    //        {
+    //            mi = lo + ((hi - lo) >> 1);
+    //            row = mi / n;
+    //            col = mi % n;
+
+    //            int mid = matrix[((start + end) / 2) / matrix.GetLength(0), ((start + end) / 2) % matrix.GetLength(0)];
+    //            if (mid== target)
+    //            {
+    //                return true.ToString();
+    //}
+    //            if (mid > target)
+    //            {
+    //                start = mid + 1;
+    //            }
+    //            else
+    //            {
+    //                end = mid - 1;
+    //            }
+    //        }
+    //        return false.ToString();
+ 
     }
 }
