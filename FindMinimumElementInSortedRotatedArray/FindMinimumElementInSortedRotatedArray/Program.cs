@@ -6,15 +6,32 @@ namespace FindMinimumElementInSortedRotatedArray
     {
         static void Main(string[] args)
         {
-            int[] arr = new int[] { 5, 6, 1, 2, 3, 4 };
-            int result = FindMin(args);
-            Console.WriteLine();
+            int[] arr = new int[] { 9,7,4,2,1 };
+            int result = FindMin(arr);
+            Console.WriteLine(result);
             Console.ReadLine();
         }
 
-        private static int FindMin(string[] args)
+        private static int FindMin(int[] args)
         {
-            throw new NotImplementedException();
+            int start = 0;
+            int end = args.Length - 1;
+            int min = args[0];
+            while (start <= end)
+            {
+                int mid = (start + end) / 2;
+                min = Math.Min(args[mid], min);
+                if (args[mid] < args[end])
+                {
+                    end = mid - 1;
+                }
+                else
+                {
+                    start = mid + 1;
+                }
+            }
+
+            return min;
         }
     }
 }
