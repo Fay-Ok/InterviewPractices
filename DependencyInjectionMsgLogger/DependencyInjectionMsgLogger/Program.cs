@@ -23,6 +23,7 @@ namespace DependencyInjectionMsgLogger
 
             LogHelper logHelper = new LogHelper(logger);
             logger.Log(msg);
+
             Console.ReadLine();
         }
     }
@@ -62,4 +63,5 @@ namespace DependencyInjectionMsgLogger
 
         }
     }
+
 }
